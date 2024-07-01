@@ -99,11 +99,7 @@ const config = {
             items: [
               {
                 label: 'Documents',
-                to: '/docs/intro',
-              },
-              {
-                label: 'API',
-                to: '/api'
+                to: '/docs/stable/intro',
               }
             ],
           },
@@ -129,7 +125,7 @@ const config = {
             items: [
               {
                 label: 'API',
-                to: '/api',
+                to: '/docs/api/intro',
               },
               {
                 label: 'GitHub',
