@@ -19,13 +19,26 @@ ray start --address=localhost:6379 --num-cpus=4 --num-gpus=2 \
 --resources='{"worker_node": 1, "worker_id_0": 1}' --block
 ```
 
-Now, start the ServerlessLLM server by running the following command in a new terminal:
+Now, let’s start ServerlessLLM.
+
+First, start ServerlessLLM Serve (i.e., `sllm-serve`)
+
 ```bash
 conda activate sllm
 sllm-serve start
 ```
 
+Next start ServerlessLLM Store server. This server will use `./models` as the storage path by default.
+
+```bash
+conda activate sllm
+sllm_store_server
+```
+
+Everything is set!
+
 Next, let's deploy a model to the ServerlessLLM server. You can deploy a model by running the following command:
+
 ```bash
 conda activate sllm
 sllm-cli deploy --model facebook/opt-1.3b
