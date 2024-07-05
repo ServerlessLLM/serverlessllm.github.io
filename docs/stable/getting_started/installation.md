@@ -20,6 +20,6 @@ cd Phantom-component
 ```
 conda create -n sllm python=3.10 -y
 conda activate sllm
-pip install -e .[worker]
+pip install -e ".[worker]"
 pip install -i https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple/ serverless_llm_store==0.0.1.dev3
 ```
