@@ -32,7 +32,7 @@ Next start ServerlessLLM Store server. This server will use `./models` as the st
 
 ```bash
 conda activate sllm
-sllm_store_server
+sllm-store-server
 ```
 
 Everything is set!
