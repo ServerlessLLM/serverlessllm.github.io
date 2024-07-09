@@ -2,6 +2,13 @@
 
 This guide will help you get started with the basics of using ServerlessLLM with Docker. Please make sure you have Docker installed on your system and have installed ServerlessLLM CLI following the [installation guide](./installation.md).
 
+## Pre-requirements
+
+Ensure you have the following pre-requirements installed:
+
+1. **GPUs**: Ensure you have at least 2 GPUs available. If more GPUs are provided, you can adjust the number of workers and the number of devices assigned to each worker.
+2. **NVIDIA Docker Toolkit**: This allows Docker to use NVIDIA GPUs. You can find the installation guide [here](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html).
+
 ## Local Test Using Docker
 
 First, let's start a local Docker-based ray cluster to test the ServerlessLLM. 
@@ -48,8 +55,6 @@ docker run -d --name ray_head \
   -p 8343:8343 \
   --gpus '"device=none"' \
   serverlessllm/sllm-serve
-
-sleep 5
 ```
 
 #### Start Ray Worker Nodes
@@ -66,7 +71,7 @@ docker run -d --name ray_worker_0 \
 docker run -d --name ray_worker_1 \
   --runtime nvidia \
   --network sllm \
-  --gpus '"device=2"' \
+  --gpus '"device=1"' \
   --env WORKER_ID=1 \
   --mount type=bind,source=$MODEL_FOLDER,target=/models \
   serverlessllm/sllm-serve-worker
@@ -104,7 +109,7 @@ INFO xx-xx xx:xx:xx deploy.py:36] Deploying model facebook/opt-1.3b with default
 INFO xx-xx xx:xx:xx deploy.py:49] Model registered successfully.
 ```
 
-### Step 6: Query the Model Using sllm-cli
+### Step 6: Query the Model
 
 Now, you can query the model by any OpenAI API client. For example, you can use the following Python code to query the model:
 ```bash
