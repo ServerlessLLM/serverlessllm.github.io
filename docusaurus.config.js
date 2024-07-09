@@ -85,7 +85,7 @@ const config = {
             label: 'API',
           },
           {
-            href: 'https://github.com/facebook/docusaurus',
+            href: 'https://github.com/ServerlessLLM/ServerlessLLM',
             label: 'GitHub',
             position: 'right',
           },
