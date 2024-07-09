@@ -15,12 +15,13 @@ function HomepageHeader() {
         <Heading as="h1" className="hero__title">
           {siteConfig.title}
         </Heading>
-        <p className="hero__subtitle">{siteConfig.tagline}</p>
+        {/* <p className="hero__subtitle">{siteConfig.tagline}</p> */}
+        <img src="/img/logo.svg" alt="ServerlessLLM" style={{ height: '300px' }} />
         <div className={styles.buttons}>
           <Link
             className="button button--secondary button--lg"
             to="/docs/stable/intro">
-            Docusaurus Tutorial - 5min ⏱️
+            Let's go to ServerlessLLM documents!
           </Link>
         </div>
       </div>
