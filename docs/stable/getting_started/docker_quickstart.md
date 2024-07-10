@@ -1,3 +1,7 @@
+---
+sidebar_position: 2
+---
+
 # Docker Quickstart Guide
 
 This guide will help you get started with the basics of using ServerlessLLM with Docker. Please make sure you have Docker installed on your system and have installed ServerlessLLM CLI following the [installation guide](./installation.md).

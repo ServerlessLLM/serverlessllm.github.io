@@ -1,3 +1,7 @@
+---
+sidebar_position: 1
+---
+
 # Quickstart Guide
 
 This guide will help you get started with the basics of using ServerlessLLM. Please make sure you have installed the ServerlessLLM following the [installation guide](./installation.md).
