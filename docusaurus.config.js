@@ -44,7 +44,7 @@ const config = {
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
-            'https://github.com/ServerlessLLM/serverlessllm.github.io/edit/main/docs/stable/intro.md',
+            'https://github.com/ServerlessLLM/serverlessllm.github.io/tree/main/',
         },
         blog: {
           showReadingTime: true,
