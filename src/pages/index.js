@@ -11,6 +11,7 @@ function HomepageHeader() {
   const {siteConfig} = useDocusaurusContext();
   return (
     <header className={clsx('hero hero--primary', styles.heroBanner)}>
+      <meta name="google-site-verification" content="paVylUvO7bZCEQC9ydl4sOZRbW2lCr7tp6_BdRxSemc" />
       <div className="container">
         <Heading as="h1" className="hero__title">
           {siteConfig.title}
