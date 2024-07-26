@@ -65,6 +65,9 @@ const config = {
     ({
       // Replace with your project's social card
       image: 'img/docusaurus-social-card.jpg',
+      metadata: [
+      {name: 'google-site-verification', content: 'paVylUvO7bZCEQC9ydl4sOZRbW2lCr7tp6_BdRxSemc'},
+      ],
       navbar: {
         title: 'ServerlessLLM',
         logo: {
