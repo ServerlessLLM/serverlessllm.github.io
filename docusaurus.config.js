@@ -45,6 +45,22 @@ const config = {
           // Remove this to remove the "edit this page" links.
           editUrl:
             'https://github.com/ServerlessLLM/serverlessllm.github.io/tree/main/',
+          // Versioning configuration
+          lastVersion: '0.7.0', // Make stable version the default
+          versions: {
+            current: {
+              label: 'Latest (dev)',
+              path: 'latest',
+              banner: 'unreleased',
+              badge: true,
+            },
+            '0.7.0': {
+              label: '0.7.0 (stable)',
+              path: '/', // Stable version at root path
+              banner: 'none',
+              badge: false,
+            },
+          },
         },
         blog: {
           showReadingTime: true,
@@ -102,7 +118,7 @@ const config = {
             items: [
               {
                 label: 'Documents',
-                to: '/docs/stable/intro',
+                to: '/docs/intro',
               }
             ],
           },
