@@ -1,0 +1,48 @@
+name: Sync Latest Docs from Main Branch
+
+# This workflow syncs documentation from the main ServerlessLLM repository
+# to keep the "Latest (dev)" version up to date with development changes
+
+on:
+  workflow_dispatch: # Manual trigger for testing
+  repository_dispatch:
+    types: [sync-latest-docs]
+
+jobs:
+  sync-latest:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout documentation website repo
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Remove current docs (excluding api/)
+        run: |
+          # Remove all docs except api/ directory
+          find docs/ -mindepth 1 -maxdepth 1 ! -name 'api' ! -name 'images' ! -name 'README.md' -exec rm -rf {} +
+
+      - name: Download docs from main ServerlessLLM repo
+        run: |
+          # Clone main repo (shallow clone for speed)
+          git clone --depth 1 https://github.com/ServerlessLLM/ServerlessLLM.git temp_repo
+
+          # Copy docs to website repo
+          cp -r temp_repo/docs/* docs/
+
+          # Clean up
+          rm -rf temp_repo
+
+      - name: Commit and push changes
+        run: |
+          git config user.name "ServerlessLLM Bot"
+          git config user.email "bot@serverlessllm.com"
+          git add docs/
+
+          # Only commit if there are changes
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "docs: sync latest from main branch"
+            git push
+          fi

@@ -1,0 +1,86 @@
+name: Create Version Snapshot
+
+# This workflow creates a versioned snapshot of documentation when a new release is published
+# The new version becomes the default "stable" version
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version number (e.g., 0.8.0)'
+        required: true
+        type: string
+      tag:
+        description: 'Git tag to sync from (e.g., v0.8.0)'
+        required: true
+        type: string
+  repository_dispatch:
+    types: [create-version-snapshot]
+
+jobs:
+  create-version:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout documentation website repo
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Get version from input
+        id: version
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            VERSION="${{ github.event.inputs.version }}"
+            TAG="${{ github.event.inputs.tag }}"
+          else
+            VERSION="${{ github.event.client_payload.version }}"
+            TAG="${{ github.event.client_payload.tag }}"
+          fi
+          echo "VERSION=$VERSION" >> $GITHUB_OUTPUT
+          echo "TAG=$TAG" >> $GITHUB_OUTPUT
+
+      - name: Sync docs from release tag
+        run: |
+          # Clone main repo at specific tag
+          git clone --depth 1 --branch ${{ steps.version.outputs.TAG }} https://github.com/ServerlessLLM/ServerlessLLM.git temp_repo
+
+          # Remove current docs (excluding api/)
+          find docs/ -mindepth 1 -maxdepth 1 ! -name 'api' ! -name 'images' ! -name 'README.md' -exec rm -rf {} +
+
+          # Copy docs from tagged release
+          cp -r temp_repo/docs/* docs/
+
+          # Clean up
+          rm -rf temp_repo
+
+      - name: Create version snapshot
+        run: |
+          npm run docusaurus docs:version ${{ steps.version.outputs.VERSION }}
+
+      - name: Update docusaurus.config.js to set new stable version
+        run: |
+          VERSION="${{ steps.version.outputs.VERSION }}"
+
+          # Update lastVersion to the new version
+          sed -i "s/lastVersion: '[^']*'/lastVersion: '$VERSION'/" docusaurus.config.js
+
+          # Add new version configuration (this is a simplified approach)
+          # You may need to manually update the versions config for labels/paths
+
+      - name: Commit and push changes
+        run: |
+          git config user.name "ServerlessLLM Bot"
+          git config user.email "bot@serverlessllm.com"
+          git add .
+          git commit -m "docs: create version ${{ steps.version.outputs.VERSION }} snapshot"
+          git push
