@@ -45,6 +45,28 @@ const config = {
           // Remove this to remove the "edit this page" links.
           editUrl:
             'https://github.com/ServerlessLLM/serverlessllm.github.io/tree/main/',
+          // Versioning configuration
+          lastVersion: '0.8.0', // Make stable version the default at /docs/
+          versions: {
+            current: {
+              label: 'Latest (dev)',
+              path: 'latest',  // Accessible at /docs/latest/
+              banner: 'unreleased',
+              badge: true,
+            },
+            '0.8.0': {
+              label: '0.8.0 (stable)',
+              // Accessible at /docs/ (root) as the lastVersion
+              banner: 'none',
+              badge: true,
+            },
+            '0.7.0': {
+              label: '0.7.0',
+              // Accessible at /docs/0.7.0/ (older version)
+              banner: 'unmaintained',
+              badge: false,
+            },
+          },
         },
         blog: {
           showReadingTime: true,
@@ -76,16 +98,21 @@ const config = {
         },
         items: [
           {
-            type: 'docSidebar',
-            sidebarId: 'tutorialSidebar',
+            type: 'doc',
+            docId: 'intro',
             position: 'left',
             label: 'Documents',
           },
           {
-            type: 'docSidebar',
-            sidebarId: 'apiSidebar',
+            type: 'doc',
+            docId: 'api/intro',
             position: 'left',
             label: 'API',
+          },
+          {
+            type: 'docsVersionDropdown',
+            position: 'right',
+            dropdownActiveClassDisabled: true,
           },
           {
             href: 'https://github.com/ServerlessLLM/ServerlessLLM',
@@ -102,7 +129,7 @@ const config = {
             items: [
               {
                 label: 'Documents',
-                to: '/docs/stable/intro',
+                to: '/docs/intro',
               }
             ],
           },
