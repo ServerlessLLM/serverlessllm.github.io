@@ -98,14 +98,14 @@ const config = {
         },
         items: [
           {
-            type: 'docSidebar',
-            sidebarId: 'tutorialSidebar',
+            type: 'doc',
+            docId: 'intro',
             position: 'left',
             label: 'Documents',
           },
           {
-            type: 'docSidebar',
-            sidebarId: 'apiSidebar',
+            type: 'doc',
+            docId: 'api/intro',
             position: 'left',
             label: 'API',
           },
