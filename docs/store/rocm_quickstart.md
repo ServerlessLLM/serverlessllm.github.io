@@ -135,7 +135,7 @@ Prompt: 'Hello, my name is', Generated text: ' Joel, my dad is my friend and we 
 Prompt: 'The president of the United States is', Generated text: ' speaking out against the release of some State Department documents which show the Russians were involved'
 Prompt: 'The capital of France is', Generated text: ' a worldwide knowledge center. What better place to learn about the history and culture of'
 Prompt: 'The future of AI is', Generated text: " here: it's the future of everything\nIf you want to test your minds"
-[rank0]:[W605 13:03:30.532018298 ProcessGroupNCCL.cpp:1476] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/distributed.html#shutdown (function operator())
+[rank0]:[W605 13:03:30.532018298 ProcessGroupNCCL.cpp:1476] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
 ```
 
 ## Build the wheel from source and install
